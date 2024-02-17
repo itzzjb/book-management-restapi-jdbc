@@ -1,4 +1,4 @@
-package com.springboot.books.v1.dao;
+package com.springboot.books.v1.dao.impl;
 
 import com.springboot.books.v1.dao.impl.BookDaoImpl;
 import com.springboot.books.v1.domain.Book;
