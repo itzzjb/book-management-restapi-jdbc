@@ -1,9 +1,10 @@
-package com.springboot.books.v1.dao;
+package com.springboot.books.v1.dao.impl;
 
 import com.springboot.books.v1.dao.impl.BookDaoImpl;
 import com.springboot.books.v1.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -43,4 +44,21 @@ public class BookDaoImplTests {
         );
     }
 
+    // There are multiple types of read methods.
+    // 1. ReadOne -> Pass in an ID, If the entity exists in the DB it returns if not you may get a null.
+    // 2. ReadMany -> Either ask to get all of the entities or a query to get a subset of them. You get a list of those entities.
+    @Test
+    public void testThatFindOneGeneratesCorrectSql() {
+
+        underTest.findOne("978-1-2345-6789-0");
+
+        // We need to do the Mapping ( Converting the result set into an object ) manually.
+        // RowMapper is one of the easy methods of doing it.
+        verify(jdbcTemplate).query(
+                eq("SELECT isbn, title, author_id FROM books WHERE isbn = ? LIMIT 1"),
+                ArgumentMatchers.<BookDaoImpl.BookRowMapper>any(),
+                eq("978-1-2345-6789-0")
+        );
+
+    }
 }
