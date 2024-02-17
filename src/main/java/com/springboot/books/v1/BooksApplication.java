@@ -1,10 +1,7 @@
-package com.springboot.books;
+package com.springboot.books.v1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.time.chrono.JapaneseDate;
 
 @SpringBootApplication
 public class BooksApplication {

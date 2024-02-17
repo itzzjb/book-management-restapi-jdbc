@@ -1,9 +1,7 @@
-package com.springboot.books.dao;
+package com.springboot.books.v1.dao;
 
-// We are setting this up as a unit test.
-
-import com.springboot.books.dao.impl.AuthorDaoImpl;
-import com.springboot.books.domain.Author;
+import com.springboot.books.v1.dao.impl.AuthorDaoImpl;
+import com.springboot.books.v1.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,18 +12,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
+// We are setting this up as a unit test.
 // We need mockito for unit testing
 @ExtendWith(MockitoExtension.class)
 public class AuthorDaoImplTests {
 
-    @Mock // Before every test for dependencies like JdbcTemplate, A Mock will be created and injected into AuthorDaoImpl class.
+    @Mock // Before every test for dependencies like JdbcTemplate, A Mock will be created.
     private JdbcTemplate jdbcTemplate;
-    @InjectMocks // Before every test a new instance of AuthorDaoImpl will be created.
+    @InjectMocks // Before every test a new instance of AuthorDaoImpl will be created and the  Mocks will be injected here.
     private AuthorDaoImpl underTest;
 
     @Test
     public void testThatCreateAuthorGeneratesCorrectSql() {
 
+        // Instantiates the object using builder().build() of @Builder
         Author author = Author.builder()
                 .id(1L) // L is to notice this is a long
                 .name("Januda Bethmin")
@@ -39,7 +39,7 @@ public class AuthorDaoImplTests {
         // Because it's creating an object it uses update JDBC method.
         verify(jdbcTemplate).update(
                 // In mockito we need to use matches instead of real values.
-                eq("INSERT into authors (id, name, age) VALUES (?, ?, ?)"),
+                eq("INSERT into authors (id, name, age) VALUES (?,?,?)"),
                 eq(1L),eq("Januda Bethmin"),eq(23)
         );
 

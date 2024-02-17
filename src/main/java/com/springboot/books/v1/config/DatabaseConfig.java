@@ -1,4 +1,4 @@
-package com.springboot.books.config;
+package com.springboot.books.v1.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

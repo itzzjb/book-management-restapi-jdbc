@@ -1,4 +1,4 @@
-package com.springboot.books.domain;
+package com.springboot.books.v1.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder //  Lets you automatically produce the code required to have your class be instantiable with code
 public class Book {
 
     private String isbn;

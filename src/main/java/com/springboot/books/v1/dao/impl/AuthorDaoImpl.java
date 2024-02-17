@@ -1,7 +1,7 @@
-package com.springboot.books.dao.impl;
+package com.springboot.books.v1.dao.impl;
 
-import com.springboot.books.dao.AuthorDao;
-import com.springboot.books.domain.Author;
+import com.springboot.books.v1.dao.AuthorDao;
+import com.springboot.books.v1.domain.Author;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class AuthorDaoImpl implements AuthorDao {
@@ -15,7 +15,7 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public void create(Author author) {
-        jdbcTemplate.update("INSERT into authors (id, name, age) VALUES (?, ?, ?)",
+        jdbcTemplate.update("INSERT into authors (id, name, age) VALUES (?,?,?)",
                 author.getId(), author.getName(), author.getAge()
         );
     }
