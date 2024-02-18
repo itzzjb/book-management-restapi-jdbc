@@ -1,6 +1,6 @@
 package com.springboot.books.v1.dao.impl;
 
-import com.springboot.books.v1.dao.impl.AuthorDaoImpl;
+import com.springboot.books.v1.TestDataUtil;
 import com.springboot.books.v1.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,12 +27,10 @@ public class AuthorDaoImplTests {
     @Test
     public void testThatCreateAuthorGeneratesCorrectSql() {
 
-        // Instantiates the object using builder().build() of @Builder
-        Author author = Author.builder()
-                .id(1L) // L is to notice this is a long
-                .name("Januda Bethmin")
-                .age(23)
-                .build();
+        // We get the resulting objects into a list.
+        // Extracted the test object creation into a method { .createTestAuthor() }, So we can reuse the functionality.
+        // And moved that into a TestDataUtil class.
+        Author author = TestDataUtil.createTestAuthor();
 
         underTest.create(author);
 

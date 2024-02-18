@@ -4,12 +4,15 @@ import com.springboot.books.v1.dao.AuthorDao;
 import com.springboot.books.v1.domain.Author;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+// We need to put the @Component annotation here because we need to tell spring to create a bean for us.
+@Component
 public class AuthorDaoImpl implements AuthorDao {
 
     // We need the JDBC Template here. So, We use dependency injection (Auto wiring) here. ( From the bean created in the config class )
