@@ -14,6 +14,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 // We are setting this up as a unit test.
+// This unit test are only for checking whether our SQL queries are correct.
 // We need mockito for unit testing
 @ExtendWith(MockitoExtension.class)
 public class BookDaoImplTests {
