@@ -1,6 +1,6 @@
 package com.springboot.books.v1.dao.impl;
 
-import com.springboot.books.v1.dao.impl.BookDaoImpl;
+import com.springboot.books.v1.TestDataUtil;
 import com.springboot.books.v1.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,6 +14,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 // We are setting this up as a unit test.
+// This unit test are only for checking whether our SQL queries are correct.
 // We need mockito for unit testing
 @ExtendWith(MockitoExtension.class)
 public class BookDaoImplTests {
@@ -26,12 +27,10 @@ public class BookDaoImplTests {
     @Test
     public void testThatCreateBookGeneratesCorrectSql() {
 
-        // Instantiates the object using builder().build() of @Builder
-        Book book = Book.builder()
-                .isbn("978-1-2345-6789-0")
-                .title("The Shadow in the Attic")
-                .authorId(1L)
-                .build();
+        // We get the resulting objects into a list.
+        // Extracted the test object creation into a method { .createTestAuthor() }, So we can reuse the functionality.
+        // And moved that into a TestDataUtil class.
+        Book book = TestDataUtil.createTestBook();
 
         underTest.create(book);
 
