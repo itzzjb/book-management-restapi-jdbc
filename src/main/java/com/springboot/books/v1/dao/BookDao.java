@@ -2,6 +2,7 @@ package com.springboot.books.v1.dao;
 
 import com.springboot.books.v1.domain.Book;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BookDao {
@@ -15,4 +16,6 @@ public interface BookDao {
     // Optional is like a box. We we find the object in the database the object will be put into the box and returned.
     // Otherwise, only the box will be returned.
     Optional<Book> findOne(String isbn);
+
+    List<Book> find();
 }

@@ -42,6 +42,18 @@ public class BookDaoImpl implements BookDao {
         return results.stream().findFirst();
     }
 
+    @Override
+    public List<Book> find() {
+        // We get the resulting objects into a list.
+        List<Book> results = jdbcTemplate.query(
+              "SELECT isbn, title, author_id FROM books",
+              new BookRowMapper()
+        );
+
+        // To find the first optional and return we can use the stream().findFirst()
+        return results;
+    }
+
     // This is a nested class for the RowMapper.
     // RowMapper creates objects for results we get from the Database.
     public static class BookRowMapper implements RowMapper<Book> {

@@ -63,6 +63,20 @@ public class AuthorDaoImplTests {
 
     }
 
+    @Test
+    public void testThatFindManyGeneratesCorrectSql() {
+
+        underTest.find();
+
+        // We need to do the Mapping ( Converting the result set into an object ) manually.
+        // RowMapper is one of the easy methods of doing it.
+        verify(jdbcTemplate).query(
+                eq("SELECT id, name, age FROM authors"),
+                ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any()
+        );
+
+    }
+
 
 
 }
