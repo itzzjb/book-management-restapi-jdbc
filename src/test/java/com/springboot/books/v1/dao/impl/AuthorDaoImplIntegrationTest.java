@@ -32,7 +32,7 @@ public class AuthorDaoImplIntegrationTest {
         this.underTest = underTest;
     }
 
-    // To testing the creation of a Author in the database and retrieving from the databa se.
+    // To testing the creation of a Author in the database and retrieving from the database.
     @Test
      public void testThatAuthorCanBeCreatedAndRecalled () {
 
