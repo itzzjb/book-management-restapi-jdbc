@@ -51,7 +51,7 @@ public class BookDaoImplIntegrationTest {
         // We only can get these from integration tests, never from Unit tests.
         Book book = TestDataUtil.createTestBook();
         // To set the match the authorId of the test objects.
-        book.setAuthorId() = author.getId();
+        book.setAuthorId(author.getId());
         underTest.create(book);
 
         // Using Optional because there is a chance we might not get a resulting object.
