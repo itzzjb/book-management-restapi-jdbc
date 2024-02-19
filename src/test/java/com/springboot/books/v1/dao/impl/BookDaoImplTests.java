@@ -30,7 +30,7 @@ public class BookDaoImplTests {
         // We get the resulting objects into a list.
         // Extracted the test object creation into a method { .createTestAuthor() }, So we can reuse the functionality.
         // And moved that into a TestDataUtil class.
-        Book book = TestDataUtil.createTestBook();
+        Book book = TestDataUtil.createTestBookA();
 
         underTest.create(book);
 
@@ -59,5 +59,18 @@ public class BookDaoImplTests {
                 eq("978-1-2345-6789-0")
         );
 
+    }
+
+    @Test
+    public void testThatFindManyGeneratesCorrectSql() {
+
+        underTest.find();
+
+        // We need to do the Mapping ( Converting the result set into an object ) manually.
+        // RowMapper is one of the easy methods of doing it.
+        verify(jdbcTemplate).query(
+                eq("SELECT isbn, title, author_id FROM books"),
+                ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any()
+        );
     }
 }

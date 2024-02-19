@@ -30,7 +30,7 @@ public class AuthorDaoImplTests {
         // We get the resulting objects into a list.
         // Extracted the test object creation into a method { .createTestAuthor() }, So we can reuse the functionality.
         // And moved that into a TestDataUtil class.
-        Author author = TestDataUtil.createTestAuthor();
+        Author author = TestDataUtil.createTestAuthorA();
 
         underTest.create(author);
 
@@ -59,6 +59,20 @@ public class AuthorDaoImplTests {
                 eq("SELECT id, name , age FROM authors WHERE id = ? LIMIT 1"),
                 ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any(),
                 eq(1L)
+        );
+
+    }
+
+    @Test
+    public void testThatFindManyGeneratesCorrectSql() {
+
+        underTest.find();
+
+        // We need to do the Mapping ( Converting the result set into an object ) manually.
+        // RowMapper is one of the easy methods of doing it.
+        verify(jdbcTemplate).query(
+                eq("SELECT id, name, age FROM authors"),
+                ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any()
         );
 
     }

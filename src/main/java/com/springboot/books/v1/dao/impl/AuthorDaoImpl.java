@@ -43,6 +43,17 @@ public class AuthorDaoImpl implements AuthorDao {
         return results.stream().findFirst();
     }
 
+    @Override
+    public List<Author> find() {
+        // We get the resulting objects into a list.
+        List<Author> results = jdbcTemplate.query(
+                "SELECT id, name, age FROM authors",
+                new AuthorRowMapper()
+        );
+
+        return results;
+    }
+
     // This is a nested class for the RowMapper.
     // RowMapper creates objects for results we get from the Database.
     public static class AuthorRowMapper implements RowMapper<Author> {
