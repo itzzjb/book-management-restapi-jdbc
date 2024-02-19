@@ -13,7 +13,7 @@ public interface AuthorDao {
     // After we retrieve that object we normally use methods on it.
     // But we can't call methods on when the event of not finding the object. This results a null pointer exception.
     // For this situation we use Optionals.
-    // Optional is like a box. We we find the object in the database the object will be put into the box and returned.
+    // Optional is like a box. We find the object in the database the object will be put into the box and returned.
     // Otherwise, only the box will be returned.
     Optional<Author> findOne(long authorId);
 

@@ -30,7 +30,7 @@ public class BookDaoImplTests {
         // We get the resulting objects into a list.
         // Extracted the test object creation into a method { .createTestAuthor() }, So we can reuse the functionality.
         // And moved that into a TestDataUtil class.
-        Book book = TestDataUtil.createTestBook();
+        Book book = TestDataUtil.createTestBookA();
 
         underTest.create(book);
 
