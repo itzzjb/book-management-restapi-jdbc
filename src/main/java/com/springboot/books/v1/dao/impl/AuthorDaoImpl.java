@@ -54,6 +54,16 @@ public class AuthorDaoImpl implements AuthorDao {
         return results;
     }
 
+    @Override
+    public void update(Author author) {
+        jdbcTemplate.update(
+                "UPDATE authors SET id = ?, name = ?, age = ? WHERE id = ?",
+                author.getId(),author.getName(),author.getAge()
+        );
+    }
+
+
+
     // This is a nested class for the RowMapper.
     // RowMapper creates objects for results we get from the Database.
     public static class AuthorRowMapper implements RowMapper<Author> {

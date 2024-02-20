@@ -77,6 +77,25 @@ public class AuthorDaoImplTests {
 
     }
 
+    // There are two types of update methods
+    // 1. Full update
+    // 2. Partial update ( This will be done under hibernate of JPA )
+
+    @Test
+    public void testThatUpdateGeneratesCorrectSql() {
+
+        // To update we require an Author object here.
+        Author author = TestDataUtil.createTestAuthorA();
+
+        underTest.update(author);
+
+        verify(jdbcTemplate).update(
+                eq("UPDATE authors SET id = ?, name = ?, age = ? WHERE id = ?"),
+                eq(1L), eq("Januda Bethmin"), eq(23)
+        );
+
+    }
+
 
 
 }
