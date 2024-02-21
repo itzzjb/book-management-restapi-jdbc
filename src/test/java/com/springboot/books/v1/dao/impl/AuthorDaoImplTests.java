@@ -96,6 +96,17 @@ public class AuthorDaoImplTests {
 
     }
 
+    @Test
+    public void testThatDeleteGeneratesCorrectSql() {
+        underTest.delete(1L);
+
+        // Deletion is considered as an update to the jdbc template
+        verify(jdbcTemplate).update(
+                eq("DELETE FROM authors WHERE id = ?"),
+                eq(1L)
+        );
+
+    }
 
 
 }
