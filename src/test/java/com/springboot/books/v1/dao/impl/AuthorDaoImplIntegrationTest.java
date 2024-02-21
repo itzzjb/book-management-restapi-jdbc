@@ -43,7 +43,7 @@ public class AuthorDaoImplIntegrationTest {
 
     // To testing the creation of a Author in the database and retrieving from the database.
     @Test
-     public void testThatAuthorCanBeCreatedAndRecalled () {
+     public void testThatAuthorsCanBeCreatedAndRecalled () {
 
         Author author = TestDataUtil.createTestAuthorA();
         underTest.create(author);
@@ -92,6 +92,23 @@ public class AuthorDaoImplIntegrationTest {
         assertThat(result).isPresent();
         // Checking whether the resulting object is equal to the inputted updated object.
         assertThat(result.get()).isEqualTo(author);
+
+    }
+
+    @Test
+    public void testThatAuthorsCanBeDeleted() {
+
+        Author author =  TestDataUtil.createTestAuthorA();
+        underTest.create(author);
+
+        // Deleting the object
+        underTest.delete(author.getId());
+
+        // Using Optional because there is a chance we might not get a resulting object.
+        Optional<Author> result = underTest.findOne(author.getId());
+        // Checking whether Optional is empty, that means the object has been deleted.
+        assertThat(result).isEmpty();
+
 
     }
 

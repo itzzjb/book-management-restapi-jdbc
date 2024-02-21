@@ -48,7 +48,7 @@ public class BookDaoImplIntegrationTest {
 
     // To testing the creation of a Book in the database and retrieving from the database.
     @Test
-    public void testThatBookCanBeCreatedAndRecalled() {
+    public void testThatBooksCanBeCreatedAndRecalled() {
 
         // We need to create the author before creating the book.
         Author author = TestDataUtil.createTestAuthorA();
