@@ -76,4 +76,23 @@ public class AuthorDaoImplIntegrationTest {
 
     }
 
+    @Test
+    public void testThatAuthorsCanBeUpdated() {
+
+        Author author = TestDataUtil.createTestAuthorA();
+        underTest.create(author);
+
+        // Making changers to the above object and updating it
+        author.setName("Updated");
+        underTest.update(author,author.getId());
+
+        // Using Optional because there is a chance we might not get a resulting object.
+        Optional<Author> result = underTest.findOne(author.getId());
+        // Checking whether the Optional has an object in it.
+        assertThat(result).isPresent();
+        // Checking whether the resulting object is equal to the inputted updated object.
+        assertThat(result.get()).isEqualTo(author);
+
+    }
+
 }

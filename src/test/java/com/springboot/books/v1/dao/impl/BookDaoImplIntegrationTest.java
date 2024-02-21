@@ -109,4 +109,32 @@ public class BookDaoImplIntegrationTest {
         assertThat(result).contains(bookA,bookB,bookC);
 
     }
+
+    @Test
+    public void testThatBooksCanBeUpdated() {
+        // We need to create the authors before creating books.
+        Author author = TestDataUtil.createTestAuthorA();
+        authorDao.create(author);
+
+        // So, There is a foreign key constraint in the Book table.
+        // So, there should be a author inorder to test to work.
+        // So, We need to create an Author object too.
+        // We only can get these from integration tests, never from Unit tests.
+        Book book = TestDataUtil.createTestBookA();
+        // To set the match the authorId of the test objects.
+        book.setAuthorId(author.getId());
+        underTest.create(book);
+
+        // Making changers to the above object and updating it
+        book.setTitle("UPDATED");
+        underTest.update(book,book.getIsbn());
+
+        // Using Optional because there is a chance we might not get a resulting object.
+        Optional<Book> result = underTest.findOne(book.getIsbn());
+        // Checking whether the Optional has an object in it.
+        assertThat(result).isPresent();
+        // Checking whether the resulting object is equal to the inputted updated object.
+        assertThat(result.get()).isEqualTo(book);
+
+    }
 }
