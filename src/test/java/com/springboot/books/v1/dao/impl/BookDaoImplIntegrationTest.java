@@ -137,4 +137,29 @@ public class BookDaoImplIntegrationTest {
         assertThat(result.get()).isEqualTo(book);
 
     }
+
+    @Test
+    public void testThatBooksCanBeDeleted() {
+        // We need to create the authors before creating books.
+        Author author = TestDataUtil.createTestAuthorA();
+        authorDao.create(author);
+
+        // So, There is a foreign key constraint in the Book table.
+        // So, there should be a author inorder to test to work.
+        // So, We need to create an Author object too.
+        // We only can get these from integration tests, never from Unit tests.
+        Book book = TestDataUtil.createTestBookA();
+        // To set the match the authorId of the test objects.
+        book.setAuthorId(author.getId());
+        underTest.create(book);
+
+        // Deleting the object
+        underTest.delete(book.getIsbn());
+
+        // Using Optional because there is a chance we might not get a resulting object.
+        Optional<Book> result = underTest.findOne(book.getIsbn());
+        // Checking whether Optional is empty, that means the object has been deleted.
+        assertThat(result).isEmpty();
+
+    }
 }
