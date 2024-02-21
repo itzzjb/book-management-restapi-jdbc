@@ -58,7 +58,7 @@ public class BookDaoImpl implements BookDao {
     public void update(Book book, String isbn) {
 
         jdbcTemplate.update(
-                "UPDATE books SET isbn = ?, title = ?, author_id = ?",
+                "UPDATE books SET isbn = ?, title = ?, author_id = ? WHERE isbn = ?",
                 book.getIsbn(), book.getTitle(), book.getAuthorId(),isbn
         );
 
