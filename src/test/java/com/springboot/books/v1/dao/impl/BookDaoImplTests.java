@@ -88,4 +88,16 @@ public class BookDaoImplTests {
 
     }
 
+    @Test
+    public void testThatDeleteBookGeneratesCorrectSql() {
+
+        underTest.delete("978-1-2345-6789-1");
+
+        // Deletion is considered as an update to the jdbc template
+        verify(jdbcTemplate).update(
+                eq("DELETE FROM books WHERE isbn = ?"),
+                eq("978-1-2345-6789-1")
+        );
+    }
+
 }

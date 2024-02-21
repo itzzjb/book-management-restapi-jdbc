@@ -64,6 +64,16 @@ public class BookDaoImpl implements BookDao {
 
     }
 
+    @Override
+    public void delete(String isbn) {
+
+        jdbcTemplate.update(
+                "DELETE FROM books WHERE isbn = ?",
+                isbn
+        );
+
+    }
+
     // This is a nested class for the RowMapper.
     // RowMapper creates objects for results we get from the Database.
     public static class BookRowMapper implements RowMapper<Book> {
