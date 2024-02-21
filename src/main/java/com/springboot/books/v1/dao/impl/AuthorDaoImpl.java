@@ -56,12 +56,23 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public void update(Author author, Long id) {
+
         jdbcTemplate.update(
                 "UPDATE authors SET id = ?, name = ?, age = ? WHERE id = ?",
                 author.getId(),author.getName(),author.getAge(),id
         );
+
     }
 
+    @Override
+    public void delete(long authorId) {
+
+        jdbcTemplate.update(
+                "DELETE FROM authors WHERE id = ?",
+                authorId
+        );
+
+    }
 
 
     // This is a nested class for the RowMapper.

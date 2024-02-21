@@ -20,4 +20,6 @@ public interface BookDao {
     List<Book> find();
 
     void update(Book book, String isbn);
+
+    void delete(String isbn);
 }
