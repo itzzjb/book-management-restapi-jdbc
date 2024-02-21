@@ -1,7 +1,7 @@
-package com.springboot.books.v1.dao.impl;
+package com.springboot.books.dao.impl;
 
-import com.springboot.books.v1.TestDataUtil;
-import com.springboot.books.v1.domain.Author;
+import com.springboot.books.TestDataUtil;
+import com.springboot.books.domain.Book;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -17,32 +17,30 @@ import static org.mockito.Mockito.verify;
 // This unit test are only for checking whether our SQL queries are correct.
 // We need mockito for unit testing
 @ExtendWith(MockitoExtension.class)
-public class AuthorDaoImplTests {
+public class BookDaoImplTests {
 
     @Mock // Before every test for dependencies like JdbcTemplate, A Mock will be created.
     private JdbcTemplate jdbcTemplate;
-    @InjectMocks // Before every test a new instance of AuthorDaoImpl will be created and the  Mocks will be injected here.
-    private AuthorDaoImpl underTest;
+    @InjectMocks  // Before every test a new instance of BookDaoImpl will be created and the  Mocks will be injected here.
+    private BookDaoImpl underTest;
 
     @Test
-    public void testThatCreateAuthorGeneratesCorrectSql() {
+    public void testThatCreateBookGeneratesCorrectSql() {
 
         // We get the resulting objects into a list.
         // Extracted the test object creation into a method { .createTestAuthor() }, So we can reuse the functionality.
         // And moved that into a TestDataUtil class.
-        Author author = TestDataUtil.createTestAuthorA();
+        Book book = TestDataUtil.createTestBookA();
 
-        underTest.create(author);
+        underTest.create(book);
 
         // We want to verify that a certain method is called in JdbcTemplate with a very particular set of arguments.
         // Method that we want to verify is .update()
         // Because it's creating an object it uses update JDBC method.
         verify(jdbcTemplate).update(
-                // In mockito we need to use matches instead of real values.
-                eq("INSERT into authors (id, name, age) VALUES (?,?,?)"),
-                eq(1L),eq("Januda Bethmin"),eq(23)
+                eq("INSERT into books (isbn, title, author_id) VALUES (?,?,?)"),
+                eq("978-1-2345-6789-0"),eq("The Shadow in the Attic"),eq(1L)
         );
-
     }
 
     // There are multiple types of read methods.
@@ -51,14 +49,14 @@ public class AuthorDaoImplTests {
     @Test
     public void testThatFindOneGeneratesCorrectSql() {
 
-        underTest.findOne(1L);
+        underTest.findOne("978-1-2345-6789-0");
 
         // We need to do the Mapping ( Converting the result set into an object ) manually.
         // RowMapper is one of the easy methods of doing it.
         verify(jdbcTemplate).query(
-                eq("SELECT id, name , age FROM authors WHERE id = ? LIMIT 1"),
-                ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any(),
-                eq(1L)
+                eq("SELECT isbn, title, author_id FROM books WHERE isbn = ? LIMIT 1"),
+                ArgumentMatchers.<BookDaoImpl.BookRowMapper>any(),
+                eq("978-1-2345-6789-0")
         );
 
     }
@@ -71,41 +69,35 @@ public class AuthorDaoImplTests {
         // We need to do the Mapping ( Converting the result set into an object ) manually.
         // RowMapper is one of the easy methods of doing it.
         verify(jdbcTemplate).query(
-                eq("SELECT id, name, age FROM authors"),
+                eq("SELECT isbn, title, author_id FROM books"),
                 ArgumentMatchers.<AuthorDaoImpl.AuthorRowMapper>any()
         );
-
     }
 
-    // There are two types of update methods
-    // 1. Full update
-    // 2. Partial update ( This will be done under hibernate of JPA )
-
     @Test
-    public void testThatUpdateAuthorGeneratesCorrectSql() {
+    public void testThatUpdateBookGeneratesCorrectSql() {
 
-        // To update we require an Author object here.
-        Author author = TestDataUtil.createTestAuthorA();
+        Book book = TestDataUtil.createTestBookA();
 
-        underTest.update(author,3L);
+        underTest.update(book, "978-1-2345-6789-1");
 
         verify(jdbcTemplate).update(
-                eq("UPDATE authors SET id = ?, name = ?, age = ? WHERE id = ?"),
-                eq(1L), eq("Januda Bethmin"), eq(23),eq(3L)
+                eq("UPDATE books SET isbn = ?, title = ?, author_id = ? WHERE isbn = ?"),
+                eq("978-1-2345-6789-0"), eq("The Shadow in the Attic"), eq(1L), eq("978-1-2345-6789-1")
         );
 
     }
 
     @Test
-    public void testThatDeleteGeneratesCorrectSql() {
-        underTest.delete(1L);
+    public void testThatDeleteBookGeneratesCorrectSql() {
+
+        underTest.delete("978-1-2345-6789-1");
 
         // Deletion is considered as an update to the jdbc template
         verify(jdbcTemplate).update(
-                eq("DELETE FROM authors WHERE id = ?"),
-                eq(1L)
+                eq("DELETE FROM books WHERE isbn = ?"),
+                eq("978-1-2345-6789-1")
         );
-
     }
 
 }

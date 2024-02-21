@@ -1,4 +1,4 @@
-package com.springboot.books.v1.domain;
+package com.springboot.books.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

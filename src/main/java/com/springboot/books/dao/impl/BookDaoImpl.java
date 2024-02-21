@@ -1,7 +1,7 @@
-package com.springboot.books.v1.dao.impl;
+package com.springboot.books.dao.impl;
 
-import com.springboot.books.v1.dao.BookDao;
-import com.springboot.books.v1.domain.Book;
+import com.springboot.books.domain.Book;
+import com.springboot.books.dao.BookDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;

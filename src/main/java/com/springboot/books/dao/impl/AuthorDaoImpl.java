@@ -1,7 +1,7 @@
-package com.springboot.books.v1.dao.impl;
+package com.springboot.books.dao.impl;
 
-import com.springboot.books.v1.dao.AuthorDao;
-import com.springboot.books.v1.domain.Author;
+import com.springboot.books.domain.Author;
+import com.springboot.books.dao.AuthorDao;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
