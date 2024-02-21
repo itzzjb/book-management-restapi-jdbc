@@ -1,7 +1,7 @@
-package com.springboot.books.v1;
+package com.springboot.books;
 
-import com.springboot.books.v1.domain.Author;
-import com.springboot.books.v1.domain.Book;
+import com.springboot.books.domain.Author;
+import com.springboot.books.domain.Book;
 
 // Utility classes are normally set to final
 public final class TestDataUtil {

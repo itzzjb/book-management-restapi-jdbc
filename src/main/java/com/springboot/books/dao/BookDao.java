@@ -1,6 +1,6 @@
-package com.springboot.books.v1.dao;
+package com.springboot.books.dao;
 
-import com.springboot.books.v1.domain.Book;
+import com.springboot.books.domain.Book;
 
 import java.util.List;
 import java.util.Optional;

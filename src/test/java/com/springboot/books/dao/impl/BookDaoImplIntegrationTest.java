@@ -1,8 +1,8 @@
-package com.springboot.books.v1.dao.impl;
+package com.springboot.books.dao.impl;
 
-import com.springboot.books.v1.TestDataUtil;
-import com.springboot.books.v1.domain.Author;
-import com.springboot.books.v1.domain.Book;
+import com.springboot.books.domain.Author;
+import com.springboot.books.domain.Book;
+import com.springboot.books.TestDataUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

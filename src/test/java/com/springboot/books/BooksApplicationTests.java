@@ -1,4 +1,4 @@
-package com.springboot.books.v1;
+package com.springboot.books;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
