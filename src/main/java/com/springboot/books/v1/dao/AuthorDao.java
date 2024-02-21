@@ -20,5 +20,5 @@ public interface AuthorDao {
     // Find will return a of Author objects.
     List<Author> find();
 
-    void update(Author author);
+    void update(Author author, Long id);
 }

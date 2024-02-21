@@ -54,6 +54,16 @@ public class BookDaoImpl implements BookDao {
         return results;
     }
 
+    @Override
+    public void update(Book book, String isbn) {
+
+        jdbcTemplate.update(
+                "UPDATE books SET isbn = ?, title = ?, author_id = ?",
+                book.getIsbn(), book.getTitle(), book.getAuthorId(),isbn
+        );
+
+    }
+
     // This is a nested class for the RowMapper.
     // RowMapper creates objects for results we get from the Database.
     public static class BookRowMapper implements RowMapper<Book> {

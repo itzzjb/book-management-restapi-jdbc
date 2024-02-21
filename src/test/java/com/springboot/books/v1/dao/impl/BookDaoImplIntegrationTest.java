@@ -109,4 +109,9 @@ public class BookDaoImplIntegrationTest {
         assertThat(result).contains(bookA,bookB,bookC);
 
     }
+
+    @Test
+    public void testThatBooksCanBeUpdated() {
+
+    }
 }
